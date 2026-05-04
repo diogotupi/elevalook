@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ElevaLook - Ensaios Virtuais com IA | Transforme fotos simples em profissionais</title>
+  <meta
+    name="description"
+    content="Transforme fotos comuns em imagens profissionais para sua marca de roupas, com tecnologia de IA e valor acessível."
+  >
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="https://use.typekit.net/dsr1jyo.css">
+  <style>
+    :root {
+      --bg: #f5ebdc;
+      --panel: #f0e2cf;
+      --panel-soft: #f7efe3;
+      --text: #3f2b1f;
+      --muted: #786150;
+      --brand: #8a5a43;
+      --brand-strong: #6e4330;
+      --ok: #9c6b51;
+      --radius: 18px;
+      --shadow: 0 18px 45px rgba(90, 62, 43, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Manrope", sans-serif;
+      background:
+        radial-gradient(900px 420px at 95% -15%, rgba(188, 151, 123, 0.24), transparent 58%),
+        radial-gradient(840px 380px at -10% 25%, rgba(222, 197, 172, 0.45), transparent 50%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      width: min(1100px, 92%);
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(8px);
+      background: rgba(245, 235, 220, 0.82);
+      border-bottom: 1px solid rgba(96, 66, 49, 0.15);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+    }
+
+    .brand {
+      font-family: "tt-ricordi-allegria", sans-serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      font-style: normal;
+      letter-spacing: 0.2px;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(120deg, var(--brand), var(--brand-strong));
+      color: #fefaf5;
+      border: 0;
+      border-radius: 999px;
+      padding: 12px 20px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 12px 26px rgba(96, 66, 49, 0.24);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 30px rgba(96, 66, 49, 0.33);
+    }
+
+    section {
+      padding: 78px 0;
+    }
+
+    .hero {
+      position: relative;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      min-height: calc(100vh - 72px);
+      overflow: hidden;
+      border-radius: 0;
+      isolation: isolate;
+    }
+
+    .hero-content {
+      width: min(1100px, 92%);
+      margin: 0 auto;
+      min-height: calc(100vh - 72px);
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: center;
+      padding: 38px 0;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(245, 235, 220, 0.62);
+      z-index: -1;
+    }
+
+    .hero-bg-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.48;
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    .hero-content > .reveal,
+    .hero-content > .hero-card {
+      position: relative;
+      z-index: 1;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(154, 107, 81, 0.1);
+      border: 1px solid rgba(140, 95, 69, 0.34);
+      color: var(--ok);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2rem, 4.6vw, 3.5rem);
+      line-height: 1.08;
+      margin-bottom: 16px;
+      letter-spacing: 0.1px;
+    }
+
+    .subtitle {
+      font-size: clamp(1.1rem, 2.4vw, 1.45rem);
+      color: #5a3e2e;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .subtext {
+      color: var(--muted);
+      font-size: 1.06rem;
+      max-width: 52ch;
+      margin-bottom: 26px;
+    }
+
+    .hero-card {
+      background: linear-gradient(145deg, #f8efe4, #ecdcc8);
+      border: 1px solid rgba(115, 78, 58, 0.18);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px;
+      animation: float 5.2s ease-in-out infinite;
+    }
+
+    .hero-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 12px;
+    }
+
+    .hero-card p {
+      color: var(--muted);
+    }
+
+    .hero-list {
+      margin-top: 18px;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .hero-list li {
+      background: rgba(255, 255, 255, 0.42);
+      border: 1px solid rgba(120, 92, 74, 0.2);
+      border-radius: 12px;
+      padding: 11px 12px;
+      font-weight: 500;
+    }
+
+    .section-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(1.8rem, 3vw, 2.7rem);
+      line-height: 1.12;
+      margin-bottom: 10px;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      margin-bottom: 26px;
+      font-size: 1.05rem;
+    }
+
+    .compare-wrap {
+      --before-image: none;
+      --after-image: none;
+      background: var(--panel);
+      border: 1px solid rgba(115, 78, 58, 0.15);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .before-after {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 14px;
+      overflow: hidden;
+      user-select: none;
+      touch-action: none;
+      cursor: ew-resize;
+      border: 1px solid rgba(115, 78, 58, 0.25);
+    }
+
+    .before-layer,
+    .after-layer {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 0 12px 14px;
+      font-size: clamp(1rem, 2.2vw, 1.4rem);
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: #ffffff;
+      text-shadow: 0 2px 18px rgba(0, 0, 0, 0.5);
+    }
+
+    .before-layer {
+      background-image: var(--before-image);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .after-layer {
+      background-image: var(--after-image);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      clip-path: inset(0 0 0 50%);
+    }
+
+    .compare-handle {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 3px;
+      height: 100%;
+      background: #fff8ef;
+      box-shadow: 0 0 0 1px rgba(90, 62, 43, 0.32);
+      pointer-events: none;
+    }
+
+    .compare-handle::before {
+      content: "↔";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #fff8ef;
+      color: #6e4330;
+      display: grid;
+      place-items: center;
+      font-size: 1.2rem;
+      font-weight: 800;
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.25);
+    }
+
+    .compare-input {
+      width: 100%;
+      margin-top: 18px;
+      accent-color: var(--brand);
+      height: 24px;
+      cursor: ew-resize;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .step {
+      background: var(--panel-soft);
+      border: 1px solid rgba(115, 78, 58, 0.16);
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    .step b {
+      display: inline-flex;
+      margin-bottom: 8px;
+      color: #5b3d2b;
+    }
+
+    .prices {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin: 20px 0 10px;
+    }
+
+    .price-card {
+      background: linear-gradient(180deg, #efe0cf, #e7d3bf);
+      border: 1px solid rgba(115, 78, 58, 0.14);
+      border-radius: 14px;
+      padding: 16px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .price-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(115, 78, 58, 0.4);
+    }
+
+    .price-card .set {
+      color: #694531;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .price-card .value {
+      font-size: 1.5rem;
+      font-weight: 800;
+    }
+
+    .price-note {
+      color: var(--muted);
+      margin-top: 10px;
+    }
+
+    .bottom-cta {
+      background: linear-gradient(125deg, rgba(193, 164, 137, 0.24), rgba(238, 226, 209, 0.5));
+      border: 1px solid rgba(115, 78, 58, 0.2);
+      border-radius: var(--radius);
+      padding: 28px;
+      text-align: center;
+    }
+
+    .bottom-cta h3 {
+      font-size: clamp(1.5rem, 2.8vw, 2.1rem);
+      margin-bottom: 12px;
+    }
+
+    .bottom-cta p {
+      color: #644a39;
+      margin-bottom: 20px;
+    }
+
+    footer {
+      border-top: 1px solid rgba(115, 78, 58, 0.18);
+      margin-top: 40px;
+      padding: 28px 0;
+      color: #7d6556;
+      text-align: center;
+      font-size: 0.94rem;
+    }
+
+    .footer-brand {
+      display: block;
+      margin-bottom: 8px;
+      font-family: "tt-ricordi-allegria", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 1.35rem;
+      color: #6e4330;
+      letter-spacing: 0.2px;
+    }
+
+    .footer-terms {
+      display: block;
+      margin-top: 10px;
+      font-size: 0.7rem;
+      color: #968070;
+      text-decoration: none;
+    }
+
+    .footer-terms:hover {
+      color: var(--brand-strong);
+      text-decoration: underline;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: 0.65s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @media (max-width: 860px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-btn {
+        width: 100%;
+      }
+
+      .topbar-inner {
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">ELEVALOOK</div>
+      <a class="cta-btn" href="#contato">Fale conosco</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="container hero">
+      <video
+        class="hero-bg-video"
+        src="assets/Ensaio IA.mov"
+        autoplay
+        loop
+        muted
+        playsinline
+        webkit-playsinline
+        preload="auto"
+      ></video>
+      <div class="hero-content">
+        <div class="reveal">
+          <span class="tag">Ensaios virtuais para moda</span>
+          <h1>Transforme fotos simples em imagens profissionais para sua marca</h1>
+          <p class="subtitle">Ensaios virtuais com qualidade de editorial, sem complicação e por um valor acessível.</p>
+          <p class="subtext">
+            Você não precisa de estúdio, modelo ou fotógrafo.
+            Nós cuidamos disso com tecnologia.
+          </p>
+          <a class="cta-btn" href="#contato">Começar meu primeiro ensaio</a>
+        </div>
+
+        <aside class="hero-card reveal">
+          <h3>Perfeito para lojas e marcas em crescimento</h3>
+          <p>Visual profissional para vender mais nas redes sociais, no site e no catálogo.</p>
+          <ul class="hero-list">
+            <li>Fotos prontas para Instagram, WhatsApp e loja online</li>
+            <li>Processo simples e fácil. Deixe a tecnologia com a gente</li>
+            <li>Entrega com padrão de revista</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="container reveal">
+      <h2 class="section-title">Veja a transformação</h2>
+      <p class="section-sub">De fotos comuns para imagens com padrão de revista.</p>
+      <div
+        class="compare-wrap"
+        style="--before-image: url('assets/antes-1.png'); --after-image: url('assets/depois-1.png');"
+      >
+        <div class="before-after">
+          <div class="before-layer"></div>
+          <div class="after-layer"></div>
+          <div class="compare-handle"></div>
+        </div>
+        <input
+          type="range"
+          min="0"
+          max="100"
+          value="50"
+          class="compare-input"
+          aria-label="Controle do antes e depois 1"
+        >
+      </div>
+      <div
+        class="compare-wrap"
+        style="--before-image: url('assets/antes-2.png'); --after-image: url('assets/depois-2.png');"
+      >
+        <div class="before-after">
+          <div class="before-layer"></div>
+          <div class="after-layer"></div>
+          <div class="compare-handle"></div>
+        </div>
+        <input
+          type="range"
+          min="0"
+          max="100"
+          value="50"
+          class="compare-input"
+          aria-label="Controle do antes e depois 2"
+        >
+      </div>
+    </section>
+
+    <section class="container reveal">
+      <h2 class="section-title">Como funciona</h2>
+      <p class="section-sub">Simples, rápido e sem mistério.</p>
+      <div class="steps">
+        <article class="step">
+          <b>1) Guia pratico</b>
+          <p>Nós te enviamos um passo a passo de como fotografar suas peças do jeito correto.</p>
+        </article>
+        <article class="step">
+          <b>2) Fotos com celular</b>
+          <p>Você faz as fotos de forma simples e envia para nossa equipe.</p>
+        </article>
+        <article class="step">
+          <b>3) Transformação com IA</b>
+          <p>Aplicamos tecnologia para criar um ensaio com acabamento profissional.</p>
+        </article>
+        <article class="step">
+          <b>4) Pronto para vender</b>
+          <p>Sua marca ganha aparencia de alto nível para divulgar e aumentar conversões.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="container reveal">
+      <h2 class="section-title">Valores</h2>
+      <p class="section-sub">Planos simples e transparentes.</p>
+      <div class="prices">
+        <article class="price-card"><div class="set">1 look</div><div class="value">R$150</div></article>
+        <article class="price-card"><div class="set">2 looks</div><div class="value">R$220</div></article>
+        <article class="price-card"><div class="set">3 looks</div><div class="value">R$300</div></article>
+        <article class="price-card"><div class="set">4 looks</div><div class="value">R$350</div></article>
+        <article class="price-card"><div class="set">5 looks</div><div class="value">R$400</div></article>
+      </div>
+      <p class="price-note">
+        Cada look inclui 6 fotos finais prontas para uso. Para volumes maiores, fale com a gente e montamos um pacote sob medida.
+      </p>
+    </section>
+
+    <section class="container reveal" id="contato">
+      <div class="bottom-cta">
+        <h3>Eleve o nível das suas fotos sem aumentar seus custos</h3>
+        <p>Fale com a gente e comece seu primeiro ensaio agora.</p>
+        <a class="cta-btn" href="https://wa.me/5500000000000" target="_blank" rel="noopener noreferrer">
+          Falar no WhatsApp
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span class="footer-brand">ELEVALOOK</span>
+    Ensaios fotográficos com tecnologia
+    <a class="footer-terms" href="termos.html">Termos e condições</a>
+  </footer>
+
+  <script>
+    const compareGroups = document.querySelectorAll(".compare-wrap");
+
+    compareGroups.forEach((group) => {
+      const compareBox = group.querySelector(".before-after");
+      const compareRange = group.querySelector(".compare-input");
+      const afterLayer = group.querySelector(".after-layer");
+      const compareHandle = group.querySelector(".compare-handle");
+      let isDragging = false;
+
+      function updateCompare(value) {
+        const val = Number(value);
+        afterLayer.style.clipPath = `inset(0 0 0 ${val}%)`;
+        compareHandle.style.left = `${val}%`;
+      }
+
+      function updateFromPointer(clientX) {
+        const rect = compareBox.getBoundingClientRect();
+        const relativeX = clientX - rect.left;
+        const percent = Math.max(0, Math.min(100, (relativeX / rect.width) * 100));
+        compareRange.value = percent;
+        updateCompare(percent);
+      }
+
+      compareRange.addEventListener("input", (event) => updateCompare(event.target.value));
+
+      compareBox.addEventListener("pointerdown", (event) => {
+        isDragging = true;
+        compareBox.setPointerCapture(event.pointerId);
+        updateFromPointer(event.clientX);
+      });
+
+      compareBox.addEventListener("pointermove", (event) => {
+        if (!isDragging) return;
+        updateFromPointer(event.clientX);
+      });
+
+      compareBox.addEventListener("pointerup", (event) => {
+        isDragging = false;
+        compareBox.releasePointerCapture(event.pointerId);
+      });
+
+      compareBox.addEventListener("pointercancel", () => {
+        isDragging = false;
+      });
+
+      updateCompare(compareRange.value);
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+
+    const heroVideo = document.querySelector(".hero-bg-video");
+
+    if (heroVideo) {
+      heroVideo.play().catch(() => {
+        const startHeroVideo = () => {
+          heroVideo.play().catch(() => {});
+          document.removeEventListener("click", startHeroVideo);
+          document.removeEventListener("touchstart", startHeroVideo);
+        };
+
+        document.addEventListener("click", startHeroVideo, { once: true });
+        document.addEventListener("touchstart", startHeroVideo, { once: true });
+      });
+    }
+  </script>
+</body>
+</html>
