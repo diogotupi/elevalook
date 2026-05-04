@@ -69,7 +69,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 14px 0;
+      padding: 11px 0;
     }
 
     .brand {
@@ -102,14 +102,19 @@
     }
 
     section {
-      padding: 78px 0;
+      padding: 52px 0;
+    }
+
+    section.hero {
+      padding-top: 0;
+      padding-bottom: 0;
     }
 
     .hero {
       position: relative;
       width: 100vw;
       margin-left: calc(50% - 50vw);
-      min-height: calc(100vh - 72px);
+      min-height: calc(100vh - 64px);
       overflow: hidden;
       border-radius: 0;
       isolation: isolate;
@@ -118,12 +123,12 @@
     .hero-content {
       width: min(1100px, 92%);
       margin: 0 auto;
-      min-height: calc(100vh - 72px);
+      min-height: calc(100vh - 64px);
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
-      gap: 28px;
+      gap: 22px;
       align-items: center;
-      padding: 38px 0;
+      padding: 28px 0;
     }
 
     .hero::after {
@@ -162,21 +167,21 @@
       padding: 6px 14px;
       font-size: 0.9rem;
       font-weight: 700;
-      margin-bottom: 18px;
+      margin-bottom: 14px;
     }
 
     h1 {
       font-family: "Cormorant Garamond", serif;
       font-size: clamp(2rem, 4.6vw, 3.5rem);
       line-height: 1.08;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       letter-spacing: 0.1px;
     }
 
     .subtitle {
       font-size: clamp(1.1rem, 2.4vw, 1.45rem);
       color: #5a3e2e;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       font-weight: 600;
     }
 
@@ -184,7 +189,7 @@
       color: var(--muted);
       font-size: 1.06rem;
       max-width: 52ch;
-      margin-bottom: 26px;
+      margin-bottom: 20px;
     }
 
     .hero-card {
@@ -192,13 +197,13 @@
       border: 1px solid rgba(115, 78, 58, 0.18);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 28px;
+      padding: 22px;
       animation: float 5.2s ease-in-out infinite;
     }
 
     .hero-card h3 {
       font-size: 1.15rem;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .hero-card p {
@@ -206,17 +211,17 @@
     }
 
     .hero-list {
-      margin-top: 18px;
+      margin-top: 14px;
       list-style: none;
       display: grid;
-      gap: 10px;
+      gap: 8px;
     }
 
     .hero-list li {
       background: rgba(255, 255, 255, 0.42);
       border: 1px solid rgba(120, 92, 74, 0.2);
       border-radius: 12px;
-      padding: 11px 12px;
+      padding: 9px 11px;
       font-weight: 500;
     }
 
@@ -224,12 +229,12 @@
       font-family: "Cormorant Garamond", serif;
       font-size: clamp(1.8rem, 3vw, 2.7rem);
       line-height: 1.12;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .section-sub {
       color: var(--muted);
-      margin-bottom: 26px;
+      margin-bottom: 18px;
       font-size: 1.05rem;
     }
 
@@ -239,9 +244,9 @@
       background: var(--panel);
       border: 1px solid rgba(115, 78, 58, 0.15);
       border-radius: var(--radius);
-      padding: 26px;
+      padding: 20px;
       box-shadow: var(--shadow);
-      margin-bottom: 18px;
+      margin-bottom: 12px;
     }
 
     .before-after {
@@ -300,7 +305,7 @@
     }
 
     .compare-handle::before {
-      content: "↔";
+      content: "";
       position: absolute;
       top: 50%;
       left: 50%;
@@ -309,17 +314,16 @@
       height: 48px;
       border-radius: 50%;
       background: #fff8ef;
-      color: #6e4330;
-      display: grid;
-      place-items: center;
-      font-size: 1.2rem;
-      font-weight: 800;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 7 4 12l5 5M15 7l5 5-5 5M4 12h16' fill='none' stroke='%236e4330' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 19px 19px;
       box-shadow: 0 12px 26px rgba(0, 0, 0, 0.25);
     }
 
     .compare-input {
       width: 100%;
-      margin-top: 18px;
+      margin-top: 12px;
       accent-color: var(--brand);
       height: 24px;
       cursor: ew-resize;
@@ -328,34 +332,34 @@
     .steps {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
+      gap: 12px;
     }
 
     .step {
       background: var(--panel-soft);
       border: 1px solid rgba(115, 78, 58, 0.16);
       border-radius: 14px;
-      padding: 18px;
+      padding: 14px;
     }
 
     .step b {
       display: inline-flex;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       color: #5b3d2b;
     }
 
     .prices {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 14px;
-      margin: 20px 0 10px;
+      gap: 11px;
+      margin: 14px 0 8px;
     }
 
     .price-card {
       background: linear-gradient(180deg, #efe0cf, #e7d3bf);
       border: 1px solid rgba(115, 78, 58, 0.14);
       border-radius: 14px;
-      padding: 16px;
+      padding: 13px;
       transition: transform 0.2s ease, border-color 0.2s ease;
     }
 
@@ -377,31 +381,31 @@
 
     .price-note {
       color: var(--muted);
-      margin-top: 10px;
+      margin-top: 8px;
     }
 
     .bottom-cta {
       background: linear-gradient(125deg, rgba(193, 164, 137, 0.24), rgba(238, 226, 209, 0.5));
       border: 1px solid rgba(115, 78, 58, 0.2);
       border-radius: var(--radius);
-      padding: 28px;
+      padding: 22px;
       text-align: center;
     }
 
     .bottom-cta h3 {
       font-size: clamp(1.5rem, 2.8vw, 2.1rem);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .bottom-cta p {
       color: #644a39;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     footer {
       border-top: 1px solid rgba(115, 78, 58, 0.18);
-      margin-top: 40px;
-      padding: 28px 0;
+      margin-top: 28px;
+      padding: 20px 0;
       color: #7d6556;
       text-align: center;
       font-size: 0.94rem;
@@ -409,7 +413,7 @@
 
     .footer-brand {
       display: block;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       font-family: "tt-ricordi-allegria", sans-serif;
       font-weight: 400;
       font-style: normal;
@@ -420,7 +424,7 @@
 
     .footer-terms {
       display: block;
-      margin-top: 10px;
+      margin-top: 8px;
       font-size: 0.7rem;
       color: #968070;
       text-decoration: none;
@@ -476,16 +480,7 @@
 
   <main>
     <section class="container hero">
-      <video
-        class="hero-bg-video"
-        src="assets/Ensaio IA.mov"
-        autoplay
-        loop
-        muted
-        playsinline
-        webkit-playsinline
-        preload="auto"
-      ></video>
+      <video class="hero-bg-video" autoplay loop muted playsinline webkit-playsinline preload="auto"></video>
       <div class="hero-content">
         <div class="reveal">
           <span class="tag">Ensaios virtuais para moda</span>
@@ -513,10 +508,7 @@
     <section class="container reveal">
       <h2 class="section-title">Veja a transformação</h2>
       <p class="section-sub">De fotos comuns para imagens com padrão de revista.</p>
-      <div
-        class="compare-wrap"
-        style="--before-image: url('assets/antes-1.png'); --after-image: url('assets/depois-1.png');"
-      >
+      <div class="compare-wrap" data-compare="1">
         <div class="before-after">
           <div class="before-layer"></div>
           <div class="after-layer"></div>
@@ -531,10 +523,7 @@
           aria-label="Controle do antes e depois 1"
         >
       </div>
-      <div
-        class="compare-wrap"
-        style="--before-image: url('assets/antes-2.png'); --after-image: url('assets/depois-2.png');"
-      >
+      <div class="compare-wrap" data-compare="2">
         <div class="before-after">
           <div class="before-layer"></div>
           <div class="after-layer"></div>
@@ -606,6 +595,8 @@
     <a class="footer-terms" href="termos.html">Termos e condições</a>
   </footer>
 
+  <script src="media-urls.js"></script>
+  <script src="apply-media-urls.js"></script>
   <script>
     const compareGroups = document.querySelectorAll(".compare-wrap");
 
@@ -667,21 +658,6 @@
     );
 
     document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
-
-    const heroVideo = document.querySelector(".hero-bg-video");
-
-    if (heroVideo) {
-      heroVideo.play().catch(() => {
-        const startHeroVideo = () => {
-          heroVideo.play().catch(() => {});
-          document.removeEventListener("click", startHeroVideo);
-          document.removeEventListener("touchstart", startHeroVideo);
-        };
-
-        document.addEventListener("click", startHeroVideo, { once: true });
-        document.addEventListener("touchstart", startHeroVideo, { once: true });
-      });
-    }
   </script>
 </body>
 </html>
